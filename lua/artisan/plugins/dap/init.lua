@@ -35,6 +35,3 @@ vim.fn.sign_define("DapStopped", {
     numhl = "DiagnosticSignInfo",
 })
 
-require("artisan.plugins.dap.python")
-require("artisan.plugins.dap.scala")
-require("artisan.plugins.dap.php")
