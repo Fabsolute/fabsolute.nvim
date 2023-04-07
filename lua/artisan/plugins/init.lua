@@ -1,7 +1,7 @@
 -- vim:foldmethod=marker
 return {
     -- Lazy.nvim itself
-    { 'folke/lazy.nvim', tag = 'stable' },
+    { 'folke/lazy.nvim',    tag = 'stable' },
 
     -- Performance {{{
 
@@ -53,21 +53,13 @@ return {
         end,
     },
 
-    {
-        'ellisonleao/carbon-now.nvim',
-        cmd = "CarbonNow",
-        config = function()
-            require('artisan.plugins.carbon')
-        end,
-    },
-
     -- }}}
 
     -- General {{{
 
     --
     {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         config = function()
             require("artisan.plugins.nvim-web-devicons")
         end,
@@ -75,9 +67,9 @@ return {
 
     -- NvimTree
     -- File explorer tree
-    -- Repo: https://github.com/kyazdani42/nvim-tree.lua
+    -- Repo: https://github.com/nvim-tree/nvim-tree.lua
     {
-        'kyazdani42/nvim-tree.lua',
+        'nvim-tree/nvim-tree.lua',
         config = function()
             require('artisan.plugins.nvim-tree')
         end,
@@ -98,9 +90,9 @@ return {
     -- Repo: https://github.com/romgrk/barbar.nvim
     {
         'romgrk/barbar.nvim',
-        dependencies = 'kyazdani42/nvim-web-devicons',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            require('artisan.plugins.bufferline')
+            require('artisan.plugins.barbar')
         end,
     },
 
@@ -176,17 +168,6 @@ return {
         end,
     },
 
-    -- Twilight
-    -- Dims inactive portions of the code
-    -- Repo: https://github.com/folke/twilight.nvim
-    {
-        'folke/twilight.nvim',
-        event = 'BufEnter',
-        config = function()
-            require("artisan.plugins.twilight")
-        end,
-    },
-
     -- Fugitive
     -- Git commands
     -- Repo: https://github.com/tpope/vim-fugitive
@@ -220,7 +201,8 @@ return {
     -- Repo: https://github.com/nvim-telescope/telescope-fzf-native.nvim
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        build =
+        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
         lazy = true,
     },
 
@@ -336,17 +318,17 @@ return {
 
     -- Snippets source for nvim-cmp
     -- Repo:
-    { 'saadparwaiz1/cmp_luasnip', lazy = true },
+    { 'saadparwaiz1/cmp_luasnip',     lazy = true },
 
     -- LSP source for nvim-cmp
     -- Repo:
-    { 'hrsh7th/cmp-nvim-lsp', lazy = true },
+    { 'hrsh7th/cmp-nvim-lsp',         lazy = true },
 
     --
-    { 'hrsh7th/cmp-buffer', lazy = true },
+    { 'hrsh7th/cmp-buffer',           lazy = true },
 
     --
-    { 'hrsh7th/cmp-path', lazy = true },
+    { 'hrsh7th/cmp-path',             lazy = true },
 
     -- }}}
 
@@ -365,7 +347,11 @@ return {
     -- mason-lspconfig.nvim
     -- Integration of lspconfig and mason.nvim
     -- Repo: https://github.com/williamboman/mason-lspconfig.nvim
-    { 'williamboman/mason-lspconfig.nvim', lazy = true, dependencies = { 'williamboman/mason.nvim' } },
+    {
+        'williamboman/mason-lspconfig.nvim',
+        lazy = true,
+        dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig' },
+    },
 
     -- Mason
     -- Portable package manager to install LSP servers
@@ -389,14 +375,6 @@ return {
     },
 
     {
-        'scalameta/nvim-metals',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require("artisan.plugins.nvim-metals")
-        end,
-    },
-
-    {
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
             require("artisan.plugins.null-ls")
@@ -412,7 +390,7 @@ return {
 
     {
         'folke/trouble.nvim',
-        dependencies ='kyazdani42/nvim-web-devicons',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require("artisan.plugins.trouble")
         end,
@@ -447,7 +425,6 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
-            "olimorris/neotest-phpunit",
         },
         config = function()
             require("artisan.plugins.neotest")
@@ -491,7 +468,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-          vim.cmd([[colorscheme tokyonight]])
+            vim.cmd([[colorscheme tokyonight]])
         end,
     },
 
@@ -518,4 +495,11 @@ return {
 
     -- }}}
 
+    {
+        "utilyre/barbecue.nvim",
+        dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require('barbecue').setup()
+        end
+    }
 }
