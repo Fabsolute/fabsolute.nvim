@@ -43,26 +43,8 @@ null_ls.setup({
                     extra_args = { "--globals vim" },
                 },
             },
-            php = {
-                {
-                    "phpcs",
-                    extra_args = { "--standard=PSR12" },
-                },
-            },
-            python = {
-                "flake8",
-            }
         },
         formatting = {
-            php = {
-                "phpcsfixer", "phpcbf", "pint",
-            },
-            scala = {
-                "scalafmt",
-            },
-            python = {
-                "black",
-            },
         },
     }),
 })
